@@ -112,10 +112,10 @@ TextureImporter:
       name: Hit-Sheet-Black_0
       rect:
         serializedVersion: 2
-        x: 5
+        x: 0
         y: 0
-        width: 37
-        height: 31
+        width: 48
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -134,10 +134,10 @@ TextureImporter:
       name: Hit-Sheet-Black_1
       rect:
         serializedVersion: 2
-        x: 53
+        x: 48
         y: 0
-        width: 37
-        height: 31
+        width: 48
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -156,10 +156,10 @@ TextureImporter:
       name: Hit-Sheet-Black_2
       rect:
         serializedVersion: 2
-        x: 101
+        x: 96
         y: 0
-        width: 37
-        height: 31
+        width: 48
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -178,10 +178,10 @@ TextureImporter:
       name: Hit-Sheet-Black_3
       rect:
         serializedVersion: 2
-        x: 149
+        x: 144
         y: 0
-        width: 37
-        height: 31
+        width: 48
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -200,7 +200,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 20a7cb1fed2f6b74db7fbcc5e1944242
     internalID: 0
     vertices: []
     indices: 

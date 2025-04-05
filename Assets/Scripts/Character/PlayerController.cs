@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerController: MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
 	private Rigidbody2D rb;
 	private SpriteRenderer spriteRenderer;
@@ -21,6 +21,7 @@ public class PlayerController: MonoBehaviour
 	[SerializeField] private float attackCooldown = 0.4f;
 	private float nextAttackTime;
 	private bool isAttacking;
+	private bool death;
 
 	void Start()
 	{
@@ -31,6 +32,7 @@ public class PlayerController: MonoBehaviour
 
 	void Update()
 	{
+		if (death) return;
 		HandleInput();
 		HandleAttack();
 		HandleJump();
@@ -39,6 +41,7 @@ public class PlayerController: MonoBehaviour
 
 	void FixedUpdate()
 	{
+		if (death) return;
 		CheckGround();
 		Movement();
 	}
@@ -53,7 +56,6 @@ public class PlayerController: MonoBehaviour
 	{
 		rb.linearVelocity = new Vector2(movement.x * speed, rb.linearVelocity.y);
 		FlipSprite(movement);
-		
 	}
 
 	private void FlipSprite(Vector2 direction)
@@ -66,7 +68,7 @@ public class PlayerController: MonoBehaviour
 	{
 		if (InputControl.Current.Gameplay.Jump.WasPerformedThisFrame() && isGrounded)
 		{
-			rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);			
+			rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
 		}
 	}
 
@@ -99,7 +101,7 @@ public class PlayerController: MonoBehaviour
 
 		foreach (var enemy in enemiesHit)
 		{
-			// Damage Enemies Later
+			enemy.GetComponent<HealthSystem>().TakeDamage(10);
 		}
 	}
 
@@ -107,5 +109,15 @@ public class PlayerController: MonoBehaviour
 	{
 		animator.SetBool("isGrounded", isGrounded);
 		animator.SetFloat("Move", Mathf.Abs(movement.x));
+	}
+
+	private void Death()
+	{
+		death = true;
+	}
+
+	private void EndDeath()
+	{
+		Destroy(gameObject);
 	}
 }

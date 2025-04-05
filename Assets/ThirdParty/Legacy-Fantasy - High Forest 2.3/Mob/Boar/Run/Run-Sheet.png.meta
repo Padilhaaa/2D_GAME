@@ -118,10 +118,10 @@ TextureImporter:
       name: Run-Sheet_0
       rect:
         serializedVersion: 2
-        x: 3
+        x: 0
         y: 0
-        width: 41
-        height: 30
+        width: 48
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,10 +140,10 @@ TextureImporter:
       name: Run-Sheet_1
       rect:
         serializedVersion: 2
-        x: 51
-        y: 1
-        width: 41
-        height: 30
+        x: 48
+        y: 0
+        width: 48
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -162,10 +162,10 @@ TextureImporter:
       name: Run-Sheet_2
       rect:
         serializedVersion: 2
-        x: 99
+        x: 96
         y: 0
-        width: 41
-        height: 30
+        width: 48
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -184,10 +184,10 @@ TextureImporter:
       name: Run-Sheet_3
       rect:
         serializedVersion: 2
-        x: 147
+        x: 144
         y: 0
-        width: 41
-        height: 28
+        width: 48
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -206,10 +206,10 @@ TextureImporter:
       name: Run-Sheet_4
       rect:
         serializedVersion: 2
-        x: 195
+        x: 192
         y: 0
-        width: 40
-        height: 27
+        width: 48
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -228,10 +228,10 @@ TextureImporter:
       name: Run-Sheet_5
       rect:
         serializedVersion: 2
-        x: 243
+        x: 240
         y: 0
-        width: 41
-        height: 28
+        width: 48
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -250,7 +250,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 99be421d7f7466a4aa6739ff14ffd5a5
     internalID: 0
     vertices: []
     indices: 
