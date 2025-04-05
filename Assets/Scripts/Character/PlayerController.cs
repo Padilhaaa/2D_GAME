@@ -15,6 +15,13 @@ public class PlayerController: MonoBehaviour
 	[SerializeField] private LayerMask groundLayer;
 	[SerializeField] private bool isGrounded;
 
+	[SerializeField] private Transform attackPoint;
+	[SerializeField] private float attackRange = 0.5f;
+	[SerializeField] private LayerMask enemyLayers;
+	[SerializeField] private float attackCooldown = 0.4f;
+	private float nextAttackTime;
+	private bool isAttacking;
+
 	void Start()
 	{
 		rb = GetComponent<Rigidbody2D>();
@@ -25,14 +32,15 @@ public class PlayerController: MonoBehaviour
 	void Update()
 	{
 		HandleInput();
+		HandleAttack();
 		HandleJump();
 		UpdateAnimations();
 	}
 
 	void FixedUpdate()
 	{
-		Movement();
 		CheckGround();
+		Movement();
 	}
 
 	public void HandleInput()
@@ -65,6 +73,34 @@ public class PlayerController: MonoBehaviour
 	private void CheckGround()
 	{
 		isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+	}
+
+	private void HandleAttack()
+	{
+		if (Time.time >= nextAttackTime && InputControl.Current.Gameplay.Attack.WasPerformedThisFrame() && !isAttacking)
+		{
+			isAttacking = true;
+			animator.SetTrigger("Attack");
+			PerformAttack();
+			nextAttackTime = Time.time + attackCooldown;
+		}
+	}
+
+	//Called by an event in the animation Attack
+	private void EndAttack()
+	{
+		isAttacking = false;
+		animator.ResetTrigger("Attack");
+	}
+
+	private void PerformAttack()
+	{
+		Collider2D[] enemiesHit = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+
+		foreach (var enemy in enemiesHit)
+		{
+			// Damage Enemies Later
+		}
 	}
 
 	private void UpdateAnimations()
