@@ -11,15 +11,14 @@ public class SaveManager : MonoBehaviour
 
 	void Awake()
 	{
-		instance = this;
-		DontDestroyOnLoad(instance);
+		if (instance == null)
+		{
+			instance = this;
+			DontDestroyOnLoad(instance);
+		}
+		else Destroy(gameObject);
 		filePath = Path.Combine(Application.persistentDataPath, "playerData.json");
-	}
-
-	void Start()
-	{
 		playerData = new();
-		Load();
 	}
 
 	public void Save()
@@ -34,6 +33,14 @@ public class SaveManager : MonoBehaviour
 		{
 			string jsonData = File.ReadAllText(filePath);
 			playerData = JsonUtility.FromJson<PlayerData>(jsonData);
+		}
+	}
+
+	public void Delete()
+	{
+		if (File.Exists(filePath))
+		{
+			File.Delete(filePath);
 		}
 	}
 

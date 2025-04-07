@@ -6,27 +6,20 @@ public class MenuManager : MonoBehaviour
 {
 	public string sceneNameToLoad;
 	public GameObject Loading;
-	public GameObject LoadButton;
 
 	public void Start()
 	{
-		if(SaveManager.instance.playerData.Level < 2) LoadButton.SetActive(false);
+		SaveManager.instance.Load();
 	}
 	public void PlayGame()
 	{
 		StartCoroutine(LoadingCoroutine());
 	}
 
-	public void LoadGame()
-	{
-		sceneNameToLoad = "Level_" + SaveManager.instance.playerData.Level.ToString();
-		StartCoroutine(LoadingCoroutine());
-	}
-
 	public IEnumerator LoadingCoroutine()
 	{
 		Loading.SetActive(true);
-		yield return new WaitForSeconds(2f);//Loading delay to see loading
+		yield return new WaitForSeconds(2f); //Loading delay to see loading screen
 		SceneManager.LoadSceneAsync(sceneNameToLoad);
 	} 
 

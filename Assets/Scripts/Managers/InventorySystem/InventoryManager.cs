@@ -124,7 +124,7 @@ public class InventoryManager : MonoBehaviour
 		List<ItemQuantity> itensToLoad = new List<ItemQuantity>();
 		itensToLoad = SaveManager.instance.playerData.items;
 
-		if (itensToLoad.Count == 0) return;
+		if (itensToLoad == null) return;
 
 		for (int i = 0; i < inventorySlots.Length; i++)
 		{

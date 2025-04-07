@@ -4,5 +4,5 @@ using System.Collections.Generic;
 public class PlayerData
 {
 	public int Level = 1;
-	public List<ItemQuantity> items = new List<ItemQuantity>();
+	public List<ItemQuantity> items = null;
 }
