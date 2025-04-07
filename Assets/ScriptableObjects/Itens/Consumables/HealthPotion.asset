@@ -14,5 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 8953182615985255646, guid: 0ea1d726773bb6c4a9b6917776990541, type: 3}
   type: 0
+  consumableType: 0
+  itemName: Health Potion
+  description: Increase your health by 20 points
   isStackable: 0
   maxItemCount: 0

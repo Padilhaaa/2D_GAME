@@ -5,8 +5,12 @@ public class Item : ScriptableObject
 {
     public Sprite image;
     public ItemType type;
+    public ConsumableType consumableType;
 
-    public bool isStackable = true;
+    public string itemName;
+    public string description;
+
+	public bool isStackable = true;
     public int maxItemCount;
 }
 
@@ -16,4 +20,10 @@ public enum ItemType
     Tool,
     Armor,
     Collectables
+}
+
+public enum ConsumableType
+{
+    Health,
+    Armor
 }

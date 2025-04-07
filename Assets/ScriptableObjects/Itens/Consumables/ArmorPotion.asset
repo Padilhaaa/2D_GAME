@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e45b8bfd9a2e08e4ba952ec1fd01a631, type: 3}
   m_Name: ArmorPotion
   m_EditorClassIdentifier: 
-  image: {fileID: 0}
+  image: {fileID: -2035980789902961352, guid: 0ea1d726773bb6c4a9b6917776990541, type: 3}
   type: 0
+  consumableType: 1
+  itemName: Armor Potion
+  description: Increase your armor by 1
   isStackable: 0
   maxItemCount: 0

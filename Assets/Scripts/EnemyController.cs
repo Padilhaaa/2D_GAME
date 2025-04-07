@@ -19,6 +19,9 @@ public class EnemyController : MonoBehaviour
 	private bool isAttacking;
 	private bool isDead;
 
+	//Loot
+	[SerializeField] LootTable lootDrop;
+
 	void Start()
 	{
 		rb = GetComponent<Rigidbody2D>();
@@ -104,7 +107,16 @@ public class EnemyController : MonoBehaviour
 	//Called in the Death animation event
 	private void DestroyEnemy()
 	{
-		//Spawn loot later
+		foreach (var lootEntry in lootDrop.lootEntries)
+		{
+			for (int i = 0; i < lootEntry.amount; i++)
+			{
+				Vector3 spawnPosition = transform.position + new Vector3(Random.Range(-1f, 1f), 0f, Random.Range(-1f, 1f));
+
+				GameObject lootItem = Instantiate(lootEntry.itemPrefab, spawnPosition, Quaternion.identity);
+			}
+		}
+
 		Destroy(gameObject);
 	}
 }

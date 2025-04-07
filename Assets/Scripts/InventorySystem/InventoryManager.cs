@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -7,6 +8,16 @@ public class InventoryManager : MonoBehaviour
 
     private bool isInventoryOpen = false;
 	public GameObject inventoryUI;
+
+	public GameObject tooltipPanel;
+	public TMP_Text tooltipText;
+
+	private PlayerController player;
+
+	public void Start()
+	{
+		player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+	}
 
 	private void Update()
 	{
@@ -57,4 +68,24 @@ public class InventoryManager : MonoBehaviour
         InventoryItem invItem= newItem.GetComponent<InventoryItem>();   
         invItem.InitializeItem(item);
     }
+
+	public void UseItem(InventoryItem itemSlot)
+	{
+		if (itemSlot == null || itemSlot.item == null) return;
+
+
+		if (itemSlot.item.type == ItemType.Consumable)
+		{
+			if (!player.HandleConsumable(itemSlot.item)) return;
+
+			itemSlot.count--;
+			itemSlot.RefreshCount();
+			if (itemSlot.count <= 0)
+			{
+				Destroy(itemSlot.gameObject);
+			}
+		}
+	}
+
+
 }

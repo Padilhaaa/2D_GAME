@@ -4,8 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
+using UnityEditorInternal.Profiling.Memory.Experimental;
 
-public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
 	public Image image;
 	public TMP_Text countText;
@@ -14,10 +15,28 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 	[HideInInspector] public Item item;
 	[HideInInspector] public int count = 1;
 
+	private bool isHovered;
+
+	public GameObject tooltipPanel;
+	public TMP_Text tooltipText;
+
+	private InventoryManager inventoryManager;
 
 	public void Start()
 	{
+		inventoryManager = FindFirstObjectByType<InventoryManager>();
 		InitializeItem(item);
+	}
+
+	private void Update()
+	{
+		if (isHovered && InputControl.Current.Gameplay.Consumable.WasPerformedThisFrame())
+		{		
+			if (inventoryManager != null)
+			{
+				inventoryManager.UseItem(this);
+			}
+		}
 	}
 
 	public void InitializeItem(Item newItem)
@@ -26,6 +45,26 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 		image.sprite = newItem.image;
 		RefreshCount();
 	}
+
+	public void OnPointerEnter(PointerEventData eventData)
+	{
+		isHovered = true;
+		if(item != null)
+		{
+			tooltipPanel = inventoryManager.tooltipPanel;
+			tooltipText = inventoryManager.tooltipText;
+			tooltipText.text = $"{item.itemName}\n{item.description}";
+			tooltipPanel.SetActive(true);
+		}
+
+	}
+
+	public void OnPointerExit(PointerEventData eventData)
+	{
+		isHovered = false;
+		tooltipPanel.SetActive(false);
+	}
+
 
 	public void RefreshCount()
 	{

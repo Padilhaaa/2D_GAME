@@ -71,6 +71,15 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Consumable"",
+                    ""type"": ""Button"",
+                    ""id"": ""cb3c7af5-21b2-43d6-99dc-9a93de6f0253"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -293,6 +302,17 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""action"": ""CursorPosition"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4d1691fe-875b-4a3f-9fe5-99b0891d3253"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""Consumable"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -345,6 +365,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_Gameplay_Attack = m_Gameplay.FindAction("Attack", throwIfNotFound: true);
         m_Gameplay_Inventory = m_Gameplay.FindAction("Inventory", throwIfNotFound: true);
         m_Gameplay_CursorPosition = m_Gameplay.FindAction("CursorPosition", throwIfNotFound: true);
+        m_Gameplay_Consumable = m_Gameplay.FindAction("Consumable", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Newaction = m_UI.FindAction("New action", throwIfNotFound: true);
@@ -420,6 +441,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Attack;
     private readonly InputAction m_Gameplay_Inventory;
     private readonly InputAction m_Gameplay_CursorPosition;
+    private readonly InputAction m_Gameplay_Consumable;
     public struct GameplayActions
     {
         private @InputActions m_Wrapper;
@@ -429,6 +451,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         public InputAction @Attack => m_Wrapper.m_Gameplay_Attack;
         public InputAction @Inventory => m_Wrapper.m_Gameplay_Inventory;
         public InputAction @CursorPosition => m_Wrapper.m_Gameplay_CursorPosition;
+        public InputAction @Consumable => m_Wrapper.m_Gameplay_Consumable;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -453,6 +476,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @CursorPosition.started += instance.OnCursorPosition;
             @CursorPosition.performed += instance.OnCursorPosition;
             @CursorPosition.canceled += instance.OnCursorPosition;
+            @Consumable.started += instance.OnConsumable;
+            @Consumable.performed += instance.OnConsumable;
+            @Consumable.canceled += instance.OnConsumable;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -472,6 +498,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @CursorPosition.started -= instance.OnCursorPosition;
             @CursorPosition.performed -= instance.OnCursorPosition;
             @CursorPosition.canceled -= instance.OnCursorPosition;
+            @Consumable.started -= instance.OnConsumable;
+            @Consumable.performed -= instance.OnConsumable;
+            @Consumable.canceled -= instance.OnConsumable;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -560,6 +589,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         void OnAttack(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);
         void OnCursorPosition(InputAction.CallbackContext context);
+        void OnConsumable(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

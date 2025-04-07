@@ -4,9 +4,15 @@ using UnityEngine.UI;
 public class HealthSystem : MonoBehaviour
 {
 	public int maxHealth = 100;
-	private int currentHealth;
+	public int currentHealth;
+
+	public bool hasArmor;
+	public int MaxAmor = 3;
+	public int currentArmor;
 
 	public Slider healthBar;
+
+	public Image[] armorBar;
 
 	private Animator animator;
 
@@ -14,26 +20,46 @@ public class HealthSystem : MonoBehaviour
 	{
 		animator = GetComponent<Animator>();
 		currentHealth = maxHealth;
+		currentArmor = 0;
 		UpdateHealthBar();
 	}
 
 	public void TakeDamage(int damage)
 	{
-		currentHealth -= damage;
-		currentHealth = Mathf.Max(currentHealth, 0);
-		UpdateHealthBar();
-
-		if (currentHealth <= 0)
+		if (hasArmor && currentArmor > 0)
 		{
-			Die();
+			currentArmor--;
 		}
+		else
+		{
+			currentHealth -= damage;
+			currentHealth = Mathf.Max(currentHealth, 0);
+			UpdateHealthBar();
+
+			if (currentHealth <= 0)
+			{
+				Die();
+			}
+		}			
 	}
 
-	public void Heal(int amount)
+	public bool Heal(int amount)
 	{
+		if (currentHealth == maxHealth) return false;
+
 		currentHealth += amount;
 		currentHealth = Mathf.Min(currentHealth, maxHealth);
 		UpdateHealthBar();
+		return true;
+	}
+
+	public bool HealArmor(int amount)
+	{
+		if (currentArmor == MaxAmor) return false;
+		currentArmor += amount;
+		currentArmor = Mathf.Min(currentArmor, MaxAmor);
+		UpdateArmorBar();
+		return true;
 	}
 
 	private void Die()
@@ -47,6 +73,17 @@ public class HealthSystem : MonoBehaviour
 		if (healthBar != null)
 		{
 			healthBar.value = (float)currentHealth / maxHealth;
+		}
+	}
+
+	private void UpdateArmorBar()
+	{
+		if (armorBar != null)
+		{
+			for (int i = 0; i < armorBar.Length; i++)
+			{
+				armorBar[i].gameObject.SetActive(i < Mathf.Clamp(currentArmor, 0, armorBar.Length));
+			}
 		}
 	}
 }

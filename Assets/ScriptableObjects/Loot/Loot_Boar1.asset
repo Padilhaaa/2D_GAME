@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5186bfc0f0b5154eb7d80b29b312a08, type: 3}
+  m_Name: Loot_Boar1
+  m_EditorClassIdentifier: 
+  lootEntries:
+  - item: {fileID: 407582473795506050, guid: a81abf78bd8f4eb41932ba50c0b8b042, type: 3}
+    itemPrefab: {fileID: 7184953967289053948, guid: a81abf78bd8f4eb41932ba50c0b8b042, type: 3}
+    amount: 2
+  - item: {fileID: 407582473795506050, guid: 7ff4e6a0e02ca7e419d3978ec23e0bfd, type: 3}
+    itemPrefab: {fileID: 7184953967289053948, guid: 7ff4e6a0e02ca7e419d3978ec23e0bfd, type: 3}
+    amount: 4

@@ -111,6 +111,22 @@ public class PlayerController : MonoBehaviour
 		animator.SetFloat("Move", Mathf.Abs(movement.x));
 	}
 
+	public bool HandleConsumable(Item item)
+	{
+		HealthSystem healthSystem = GetComponent<HealthSystem>();
+		if (item.consumableType == ConsumableType.Health)
+		{
+			if (healthSystem.Heal(20)) return true;
+			else return false;
+		}
+		else if (item.consumableType == ConsumableType.Armor)
+		{
+			if (healthSystem.HealArmor(1)) return true;
+			else return false;
+		}
+		return false;
+	}
+
 	private void Death()
 	{
 		death = true;

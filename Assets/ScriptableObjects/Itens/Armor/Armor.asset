@@ -14,5 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 0}
   type: 0
+  consumableType: 1
+  itemName: 
+  description: 
   isStackable: 0
   maxItemCount: 0
