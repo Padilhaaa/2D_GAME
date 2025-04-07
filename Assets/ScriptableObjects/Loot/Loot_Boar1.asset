@@ -19,3 +19,6 @@ MonoBehaviour:
   - item: {fileID: 407582473795506050, guid: 7ff4e6a0e02ca7e419d3978ec23e0bfd, type: 3}
     itemPrefab: {fileID: 7184953967289053948, guid: 7ff4e6a0e02ca7e419d3978ec23e0bfd, type: 3}
     amount: 4
+  - item: {fileID: 407582473795506050, guid: 52b7dc87038807441ab88587d3d631e9, type: 3}
+    itemPrefab: {fileID: 7184953967289053948, guid: 52b7dc87038807441ab88587d3d631e9, type: 3}
+    amount: 5

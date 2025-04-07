@@ -21,6 +21,7 @@ public class LootItem : MonoBehaviour
 				bool added = inventoryManager.AddItem(itemData);
 				if (added)
 				{
+					inventoryManager.SaveInventory();
 					Destroy(gameObject);
 				}
 			}

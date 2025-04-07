@@ -8,10 +8,9 @@ public class MenuManager : MonoBehaviour
 	public GameObject Loading;
 	public GameObject LoadButton;
 
-	public void Awake()
+	public void Start()
 	{
-		//Check Save
-		//if(save.level < 2) LoadButton.SetActive(false);
+		if(SaveManager.instance.playerData.Level < 2) LoadButton.SetActive(false);
 	}
 	public void PlayGame()
 	{
@@ -20,8 +19,7 @@ public class MenuManager : MonoBehaviour
 
 	public void LoadGame()
 	{
-		//Save
-		//sceneNameToLoad = "Level_" + save.level.ToString();
+		sceneNameToLoad = "Level_" + SaveManager.instance.playerData.Level.ToString();
 		StartCoroutine(LoadingCoroutine());
 	}
 

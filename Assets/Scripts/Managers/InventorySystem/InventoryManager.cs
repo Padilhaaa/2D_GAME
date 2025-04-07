@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using System.Collections.Generic;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class InventoryManager : MonoBehaviour
 	public void Start()
 	{
 		player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+		LoadInventory();
 	}
 
 	private void Update()
@@ -41,9 +43,9 @@ public class InventoryManager : MonoBehaviour
 		{
 			InventorySlot slot = inventorySlots[i];
 			InventoryItem itemSlot = slot.GetComponentInChildren<InventoryItem>();
-			if (itemSlot != null && itemSlot.item == item && itemSlot.count < item.maxItemCount && itemSlot.item.isStackable)
+			if (itemSlot != null && itemSlot.item == item && itemSlot.itemCount < item.maxItemCount && itemSlot.item.isStackable)
 			{
-				itemSlot.count++;
+				itemSlot.itemCount++;
                 itemSlot.RefreshCount();
 				return true;
 			}
@@ -62,7 +64,16 @@ public class InventoryManager : MonoBehaviour
 		return false;
 	}
 
-    private void SpawnNewItem(Item item,InventorySlot slot)
+	public void AddItem(Item item, int slotToInsert, int count)
+	{
+		InventorySlot slot = inventorySlots[slotToInsert];
+		SpawnNewItem(item, slot);
+		InventoryItem itemSlot = slot.GetComponentInChildren<InventoryItem>();
+		itemSlot.itemCount = count;
+		itemSlot.RefreshCount();
+	}
+
+	private void SpawnNewItem(Item item,InventorySlot slot)
     {
         GameObject newItem = Instantiate(inventoryItemPrefab, slot.transform);
         InventoryItem invItem= newItem.GetComponent<InventoryItem>();   
@@ -78,14 +89,51 @@ public class InventoryManager : MonoBehaviour
 		{
 			if (!player.HandleConsumable(itemSlot.item)) return;
 
-			itemSlot.count--;
+			itemSlot.itemCount--;
 			itemSlot.RefreshCount();
-			if (itemSlot.count <= 0)
+			if (itemSlot.itemCount <= 0)
 			{
 				Destroy(itemSlot.gameObject);
 			}
 		}
 	}
 
+	public void SaveInventory()
+	{
+		List<ItemQuantity> itensToSave = new List<ItemQuantity>();
+
+		for (int i = 0; i < inventorySlots.Length; i++)
+		{
+			InventoryItem item = inventorySlots[i].GetComponentInChildren<InventoryItem>();
+			if (item == null) itensToSave.Add(null);
+			else
+			{
+				ItemQuantity itemQuantity = new();
+				itemQuantity.item = item.item;
+				itemQuantity.Count = item.itemCount;
+				itensToSave.Add(itemQuantity); 
+			}
+		}
+
+		SaveManager.instance.playerData.items = itensToSave;
+		SaveManager.instance.Save();
+	}
+
+	public void LoadInventory()
+	{
+		List<ItemQuantity> itensToLoad = new List<ItemQuantity>();
+		itensToLoad = SaveManager.instance.playerData.items;
+
+		if (itensToLoad.Count == 0) return;
+
+		for (int i = 0; i < inventorySlots.Length; i++)
+		{
+			ItemQuantity item = itensToLoad[i];
+			if (item.item != null)
+			{
+				AddItem(itensToLoad[i].item, i, itensToLoad[i].Count);
+			}
+		}
+	}
 
 }

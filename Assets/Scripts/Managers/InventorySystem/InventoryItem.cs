@@ -13,8 +13,8 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
 	[HideInInspector] public Transform parentAfterDrag;
 	[HideInInspector] public Item item;
-	[HideInInspector] public int count = 1;
 
+	public int itemCount = 1;
 	private bool isHovered;
 
 	public GameObject tooltipPanel;
@@ -68,8 +68,8 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
 	public void RefreshCount()
 	{
-		countText.text = count.ToString();
-		countText.gameObject.SetActive(count > 1);
+		countText.text = itemCount.ToString();
+		countText.gameObject.SetActive(itemCount > 1);
 	}
 
 	public void OnBeginDrag(PointerEventData eventData)

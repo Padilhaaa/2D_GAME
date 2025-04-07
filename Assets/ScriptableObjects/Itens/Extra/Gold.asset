@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e45b8bfd9a2e08e4ba952ec1fd01a631, type: 3}
   m_Name: Gold
   m_EditorClassIdentifier: 
-  image: {fileID: 0}
-  type: 0
+  image: {fileID: 3135586836448200105, guid: 0ea1d726773bb6c4a9b6917776990541, type: 3}
+  type: 3
+  consumableType: 0
+  itemName: Gold
+  description: Use to trade some itens
   isStackable: 1
-  maxItemCount: 0
+  maxItemCount: 4
+  itemCount: 0

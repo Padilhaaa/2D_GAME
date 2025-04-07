@@ -1,6 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(menuName ="ScriptableObject/Item")]
+[System.Serializable]
 public class Item : ScriptableObject
 {
     public Sprite image;
@@ -12,6 +13,12 @@ public class Item : ScriptableObject
 
 	public bool isStackable = true;
     public int maxItemCount;
+}
+[System.Serializable]
+public class ItemQuantity
+{
+    public Item item;
+    public int Count;
 }
 
 public enum ItemType
